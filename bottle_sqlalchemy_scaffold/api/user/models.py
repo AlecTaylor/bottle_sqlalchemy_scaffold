@@ -11,3 +11,6 @@ class User(Base):
 
     def __repr__(self):
         return "<User('{email}')>".format(email=self.email)
+
+    def to_d(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}

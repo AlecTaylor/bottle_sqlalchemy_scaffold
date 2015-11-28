@@ -23,8 +23,10 @@ def create():
         return {'error': e.__class__.__name__,
                 'error_message': 'User already exists'}
     finally:
+        user = locals().get('user')
+        if user:
+            user = user.to_d()
         session.close()
-
     response.status = 201
     return user
 
