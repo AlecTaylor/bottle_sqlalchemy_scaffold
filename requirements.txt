@@ -1,3 +1,4 @@
 bottle
 bottle-sqlalchemy
 psycopg2
+jsonschema
