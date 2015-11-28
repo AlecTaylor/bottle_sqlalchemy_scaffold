@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from os import environ
 from bottle import Bottle
-from utils import depends, sqlalchemy_plugin, Base
+from bottle_sqlalchemy_scaffold.utils import depends, sqlalchemy_plugin, Base
 from bottle_sqlalchemy_scaffold.api.user.routes import api as user_api
 
 __author__ = 'Samuel Marks'

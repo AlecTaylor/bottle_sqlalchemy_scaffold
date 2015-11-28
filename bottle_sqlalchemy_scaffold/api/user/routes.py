@@ -1,10 +1,9 @@
 from __future__ import absolute_import
 from bottle import Bottle, response, request
-from bottle_sqlalchemy_scaffold.utils import depends, sqlalchemy_plugin, Base, engine
-from bottle_sqlalchemy_scaffold.api.user.models import User
+from ...utils import depends, sqlalchemy_plugin, Base, engine
+from .models import User
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from psycopg2 import IntegrityError
 
 api = Bottle()
 depends(api, sqlalchemy_plugin(Base))
@@ -12,28 +11,18 @@ create_session = sessionmaker(bind=engine)
 
 
 @api.post('/user')
-def create(db):
+def create():
     session = create_session()
     try:
         user = User(**request.json)
-        db.add(user)
+        session.add(user)
         session.commit()
     except SQLAlchemyError as e:
-        print('ROLLING BACK')
         session.rollback()
-        return {'error': e.__class__.__name__,
-                'error_message': 'User already exists'}
-    except IntegrityError as e:
         response.status = 422
         return {'error': e.__class__.__name__,
                 'error_message': 'User already exists'}
-    except Exception as e:
-        if e.__class__.__name__ == 'IntegrityError':
-            response.status = 422
-        return {'error': e.__class__.__name__,
-                'error_message': 'User already exists'}
     finally:
-        print('closing session')
         session.close()
 
     response.status = 201

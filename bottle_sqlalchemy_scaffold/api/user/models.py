@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from bottle_sqlalchemy_scaffold.utils import Base
+from ...utils import Base
 from sqlalchemy import Column, String
 
 
