@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from bottle import Bottle, response, request
 from bottle_sqlalchemy_scaffold.utils import depends, sqlalchemy_plugin, Base, engine
-from models import User
+from bottle_sqlalchemy_scaffold.api.user.models import User
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from psycopg2 import IntegrityError

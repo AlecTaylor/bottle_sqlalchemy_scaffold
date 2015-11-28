@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
-__author__ = 'Samuel Marks'
-__version__ = '0.0.1'
-
+from __future__ import absolute_import
 from os import environ
 from bottle import Bottle
 from utils import depends, sqlalchemy_plugin, Base
-from api.user.routes import api as user_api
+from bottle_sqlalchemy_scaffold.api.user.routes import api as user_api
+
+__author__ = 'Samuel Marks'
+__version__ = '0.0.1'
 
 api = Bottle()
 api.merge(user_api)

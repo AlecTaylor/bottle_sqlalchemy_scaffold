@@ -1,10 +1,10 @@
+from __future__ import absolute_import
 from bottle_sqlalchemy_scaffold.utils import Base
-from sqlalchemy import Column, Integer, Sequence, String
+from sqlalchemy import Column, String
 
 
 class User(Base):
     __tablename__ = 'user_tbl'
-    __table_args__ = {'extend_existing': True}
 
     email = Column(String, primary_key=True)
     password = Column(String)
